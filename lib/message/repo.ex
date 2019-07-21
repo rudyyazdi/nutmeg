@@ -15,8 +15,25 @@ defmodule Message.Repo do
     result = Mongo.insert_one(:mongo, @collection_name, message)
 
     case result do
-      {:ok, _response} -> {:ok, message}
-      _ -> {:error, result}
+      {:ok, %Mongo.InsertOneResult{inserted_id: id}} ->
+        %{
+          "channel" => channel,
+          "text" => text,
+          "time" => time,
+          "username" => username
+        } = Mongo.find_one(:mongo, @collection_name, %{_id: id})
+
+        {:ok,
+         %Message.Model{
+           channel: channel,
+           id: id,
+           text: text,
+           time: time,
+           username: username
+         }}
+
+      _ ->
+        {:error, result}
     end
   end
 
