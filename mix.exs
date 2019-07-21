@@ -28,7 +28,9 @@ defmodule Nutmeg.MixProject do
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0.0-rc.6", only: [:dev], runtime: false},
       {:plug_cowboy, "~> 2.0"},
-      {:poison, "~> 3.1"}
+      {:poison, "~> 3.1"},
+      {:mongodb, "~> 0.4.9"},
+      {:poolboy, "~> 1.5.2"}
     ]
   end
 end
