@@ -1,6 +1,7 @@
 defmodule Message.Model do
   @enforce_keys [:text, :username, :channel]
   defstruct(
+    id: nil,
     text: nil,
     username: nil,
     channel: nil,
@@ -8,6 +9,7 @@ defmodule Message.Model do
   )
 
   @type t() :: %__MODULE__{
+          id: String.t() | nil,
           text: String.t(),
           username: String.t(),
           channel: String.t(),
