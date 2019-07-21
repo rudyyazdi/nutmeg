@@ -47,10 +47,10 @@ defmodule Message.Router do
   # A simple route to test that the server is up
   # Note, all routes must return a connection as per the Plug spec.
   get "/" do
-    resolve(conn, %{"status" => "ok"})
+    conn |> resolve(%{"status" => "ok"})
   end
 
   match _ do
-    resolve(conn, 404, "404")
+    conn |> resolve(404, "404")
   end
 end
