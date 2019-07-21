@@ -4,7 +4,7 @@ defmodule Message.RouterTest do
 
   @opts Message.Router.init([])
 
-  test "it returns pong" do
+  test "it returns ok" do
     # Create a test connection
     conn = conn(:get, "/")
 
@@ -15,6 +15,16 @@ defmodule Message.RouterTest do
     assert conn.state == :sent
     assert conn.status == 200
     assert conn.resp_body |> Poison.decode! |> Map.get("status") == "ok"
+  end
+
+  test "it has the right headers" do
+    # Create a test connection
+    conn = conn(:get, "/")
+
+    # Invoke the plug
+    conn = Message.Router.call(conn, @opts)
+
+    assert conn.resp_headers == [{"cache-control", "max-age=0, private, must-revalidate"}, {"accept", "application/json"}, {"content-type", "application/json"}]
   end
 
   test "it returns 404 when no route matches" do
