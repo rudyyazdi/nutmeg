@@ -1,3 +1,3 @@
 use Mix.Config
 
-config :message, port: 4002
+config :nutmeg, port: 4002
