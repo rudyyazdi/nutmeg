@@ -5,8 +5,10 @@ defmodule Message.Application do
   @spec start(any, any) :: {:error, any} | {:ok, pid}
   def start(_type, _args) do
     children = [
-      {Plug.Cowboy, scheme: :http, plug: Message.Router, options: [port: Application.get_env(:nutmeg, :port)]}
+      {Plug.Cowboy,
+       scheme: :http, plug: Message.Router, options: [port: Application.get_env(:nutmeg, :port)]}
     ]
+
     opts = [strategy: :one_for_one, name: Example.Supervisor]
 
     Logger.info("Starting application...")

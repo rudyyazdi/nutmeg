@@ -1,0 +1,21 @@
+#!/bin/bash
+
+check_command () {
+  c_name=$1
+  c_cmd=$2
+  echo checking $c_name ... 
+  c_message=$(eval "$c_cmd")
+  if [ $? -eq 0 ]
+  then
+    echo "Done!"
+  else
+    echo "[31mCommand ${c_name} Failed! [0m"
+    echo $c_message
+    exit 1
+  fi
+}
+
+check_command "format" "mix format"
+check_command "dialyzer" "mix dialyzer --format dialyxir --halt-exit-status"
+
+exit 0

@@ -13,7 +13,6 @@ defmodule Message.Router do
   #   |> send_resp(200, "Hello World3!\n")
   # end
 
-
   use Plug.Router
 
   # This module is a Plug, that also implements it's own plug pipeline, below:

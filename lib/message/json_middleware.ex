@@ -6,7 +6,7 @@ defmodule Message.JsonMiddleware do
     options
   end
 
-  @spec call(Plug.Conn.t, list(integer)) :: Plug.Conn.t
+  @spec call(Plug.Conn.t(), list(integer)) :: Plug.Conn.t()
   def call(conn, _) do
     conn
     |> put_resp_header("accept", "application/json")
