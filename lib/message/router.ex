@@ -16,15 +16,15 @@ defmodule Message.Router do
   use Plug.Router
 
   defp resolve(conn, status, res) when is_map(res) do
-    send_resp(conn, status, Poison.encode!(res))
+    conn |> send_resp(status, Poison.encode!(res))
   end
 
   defp resolve(conn, status, res) do
-    send_resp(conn, status, res)
+    conn |> send_resp(status, res)
   end
 
   defp resolve(conn, res) do
-    resolve(conn, 200, res)
+    conn |> resolve(200, res)
   end
 
   # This module is a Plug, that also implements it's own plug pipeline, below:
