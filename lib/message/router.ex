@@ -15,6 +15,18 @@ defmodule Message.Router do
 
   use Plug.Router
 
+  defp resolve(conn, status, res) when is_map(res) do
+    send_resp(conn, status, Poison.encode!(res))
+  end
+
+  defp resolve(conn, status, res) do
+    send_resp(conn, status, res)
+  end
+
+  defp resolve(conn, res) do
+    resolve(conn, 200, res)
+  end
+
   # This module is a Plug, that also implements it's own plug pipeline, below:
 
   # Using Plug.Logger for logging request information
@@ -35,10 +47,10 @@ defmodule Message.Router do
   # A simple route to test that the server is up
   # Note, all routes must return a connection as per the Plug spec.
   get "/" do
-    send_resp(conn, 200, Poison.encode!(%{"status" => "ok"}))
+    resolve(conn, %{"status" => "ok"})
   end
 
   match _ do
-    send_resp(conn, 404, "404")
+    resolve(conn, 404, "404")
   end
 end
