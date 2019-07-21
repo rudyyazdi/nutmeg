@@ -24,7 +24,9 @@ defmodule Message.RouterTest do
     # Invoke the plug
     conn = Message.Router.call(conn, @opts)
 
-    assert conn.resp_headers == [{"cache-control", "max-age=0, private, must-revalidate"}, {"accept", "application/json"}, {"content-type", "application/json"}]
+    assert {"cache-control", "max-age=0, private, must-revalidate"} in conn.resp_headers
+    assert {"accept", "application/json"} in conn.resp_headers
+    assert {"content-type", "application/json"} in conn.resp_headers
   end
 
   test "it returns 404 when no route matches" do
