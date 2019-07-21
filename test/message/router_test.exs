@@ -14,7 +14,7 @@ defmodule Message.RouterTest do
     # Assert the response and status
     assert conn.state == :sent
     assert conn.status == 200
-    assert conn.resp_body |> Poison.decode! == %{"status" => "ok"}
+    assert conn.resp_body |> Poison.decode! |> Map.get("status") == "ok"
   end
 
   test "it returns 404 when no route matches" do
