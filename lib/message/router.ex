@@ -50,6 +50,8 @@ defmodule Message.Router do
     conn |> resolve(%{"status" => "ok"})
   end
 
+  forward("/api/v1", to: ReverseProxyPlug, upstream: "http://localhost:8080/api/v1")
+
   match _ do
     conn |> resolve(404, "404")
   end

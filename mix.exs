@@ -30,7 +30,8 @@ defmodule Nutmeg.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:poison, "~> 3.1"},
       {:mongodb, "~> 0.4.9"},
-      {:poolboy, "~> 1.5.2"}
+      {:poolboy, "~> 1.5.2"},
+      {:reverse_proxy_plug, "~> 1.2.1"}
     ]
   end
 end
